@@ -1,4 +1,4 @@
-package com.turtle.turtlebooks.app.post.entity;
+package com.turtle.turtlebooks.app.member.entity;
 
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -9,7 +9,7 @@ import javax.persistence.Id;
 import java.time.LocalDateTime;
 
 @Entity
-public class Post {
+public class Member {
 
     @Id @GeneratedValue
     private long id;
@@ -20,13 +20,16 @@ public class Post {
     @LastModifiedDate
     private LocalDateTime updateDate;
 
-    // 회원 번호
-    private long memberId;
+    private String username;
 
-    private String subject;
+    private String password;
 
-    private String content;
+    private String nickname;
 
-    private String contentHtml;
+    private String email;
+
+    // 권한 레벨 3 => 일반 사용자 , 레벨 7 => 관리자
+//    private AuthLevel authLevel;
+
 
 }

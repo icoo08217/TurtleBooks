@@ -1,4 +1,4 @@
-package com.turtle.turtlebooks.app.post.entity;
+package com.turtle.turtlebooks.app.product.entity;
 
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -9,9 +9,10 @@ import javax.persistence.Id;
 import java.time.LocalDateTime;
 
 @Entity
-public class Post {
+public class Product {
 
-    @Id @GeneratedValue
+    @Id
+    @GeneratedValue
     private long id;
 
     @CreatedDate
@@ -21,12 +22,14 @@ public class Post {
     private LocalDateTime updateDate;
 
     // 회원 번호
-    private long memberId;
+    private long authorId;
+
+    // 글 키워드 번호
+    private long postKeywordId;
 
     private String subject;
 
-    private String content;
+    private int price;
 
-    private String contentHtml;
 
 }
