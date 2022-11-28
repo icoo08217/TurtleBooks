@@ -1,24 +1,12 @@
 package com.turtle.turtlebooks.app.member.entity;
 
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
+import com.turtle.turtlebooks.app.base.entity.BaseEntity;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import java.time.LocalDateTime;
+
 
 @Entity
-public class Member {
-
-    @Id @GeneratedValue
-    private long id;
-
-    @CreatedDate
-    private LocalDateTime createDate;
-
-    @LastModifiedDate
-    private LocalDateTime updateDate;
+public class Member extends BaseEntity {
 
     private String username;
 

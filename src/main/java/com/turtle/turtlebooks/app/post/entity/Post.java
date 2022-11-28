@@ -1,24 +1,12 @@
 package com.turtle.turtlebooks.app.post.entity;
 
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
+import com.turtle.turtlebooks.app.base.entity.BaseEntity;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import java.time.LocalDateTime;
+
 
 @Entity
-public class Post {
-
-    @Id @GeneratedValue
-    private long id;
-
-    @CreatedDate
-    private LocalDateTime createDate;
-
-    @LastModifiedDate
-    private LocalDateTime updateDate;
+public class Post extends BaseEntity {
 
     // 회원 번호
     private long memberId;
