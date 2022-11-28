@@ -19,5 +19,4 @@ public class Member extends BaseEntity {
     // 권한 레벨 3 => 일반 사용자 , 레벨 7 => 관리자
 //    private AuthLevel authLevel;
 
-
 }
