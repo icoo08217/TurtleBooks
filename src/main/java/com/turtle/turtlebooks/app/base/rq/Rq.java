@@ -16,11 +16,11 @@ public class Rq {
 
     private final HttpServletRequest req;
     private final HttpServletResponse resp;
-    private final MemberContext memberContext;
+//    private final MemberContext memberContext;
 
     // 과제 : Rq 클래스 도입하기......
-    @Getter
-    private final Member member;
+//    @Getter
+//    private final Member member;
 
     public Rq(HttpServletRequest req, HttpServletResponse resp) {
         this.req = req;
