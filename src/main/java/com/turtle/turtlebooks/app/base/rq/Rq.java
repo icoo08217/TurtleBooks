@@ -17,18 +17,29 @@ public class Rq {
     private final HttpServletRequest req;
     private final HttpServletResponse resp;
 //    private final MemberContext memberContext;
+    @Getter
+    private final Member member;
 
-    // 과제 : Rq 클래스 도입하기......
-//    @Getter
-//    private final Member member;
-
-    public Rq(HttpServletRequest req, HttpServletResponse resp) {
+    public Rq(HttpServletRequest req, HttpServletResponse resp, Member member) {
         this.req = req;
         this.resp = resp;
 
         //현재 로그인한 회원의 인증정보를 가져옴.
+        this.member = member;
     }
 
     public boolean isLogined() {
+        return isLogout() == false;
+    }
+
+    public boolean isLogout() {
+        return member == null;
+    }
+
+    public long getId() {
+        if ( isLogout()) {
+            return 0;
+        }
+        return getMember().getId();
     }
 }
