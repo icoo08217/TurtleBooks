@@ -29,4 +29,6 @@ public class Rq {
         //현재 로그인한 회원의 인증정보를 가져옴.
     }
 
+    public boolean isLogined() {
+    }
 }
