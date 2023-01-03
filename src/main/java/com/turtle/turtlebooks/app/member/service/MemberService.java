@@ -72,4 +72,8 @@ public class MemberService {
     private void setTempPassword(Member actor, String tempPassword) {
         actor.setPassword(passwordEncoder.encode(tempPassword));
     }
+
+    public long getRestCash(Member member) {
+        return memberRepository.findById(member.getId()).get().getRestCash();
+    }
 }

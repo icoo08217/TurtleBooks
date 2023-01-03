@@ -95,4 +95,15 @@ public class MemberController {
 
         return Rq.redirectWithMsg("/member/login?username=%s".formatted(member.getUsername()), "해당 이메일로 '%s' 님의 임시비밀번호를 발송하였습니다.".formatted(member.getUsername()));
     }
+
+    // 자기 페이지
+    @PreAuthorize("isAuthenticated()")
+    @GetMapping
+    public String showProfile(Model model) {
+
+        long actorRestCash = memberService.getRestCash(rq.getMember());
+        model.addAttribute("actorRestCash", actorRestCash);
+
+        return "member/profile";
+    }
 }
