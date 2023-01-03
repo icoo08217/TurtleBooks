@@ -19,10 +19,10 @@ public class HomeController {
 
     @GetMapping("/")
     public String showMain(Model model) {
-        if ( rq.isLogined() ) {
-            List<Post> posts = postService.findAllForPrintByAuthorIdOrderByIdDesc(rq.getId());
-            model.addAttribute("posts", posts);
-        }
+//        if ( rq.isLogined() ) {
+//            List<Post> posts = postService.findAllForPrintByAuthorIdOrderByIdDesc(rq.getId());
+//            model.addAttribute("posts", posts);
+//        }
 
         return "home/main";
     }

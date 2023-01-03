@@ -15,10 +15,10 @@ public class PostService {
 
     private final PostRepository postRepository;
 
-    public List<Post> findAllForPrintByAuthorIdOrderByIdDesc(long authorId) {
-        List<Post> posts = postRepository.findAllByAuthorIdOrderByIdDesc(authorId);
-
-        return posts;
-    }
+//    public List<Post> findAllForPrintByAuthorIdOrderByIdDesc(long authorId) {
+//        List<Post> posts = postRepository.findAllByAuthorIdOrderByIdDesc(authorId);
+//
+//        return posts;
+//    }
 
 }
