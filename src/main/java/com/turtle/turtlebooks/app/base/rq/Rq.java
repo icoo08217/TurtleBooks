@@ -35,8 +35,24 @@ public class Rq {
         return "redirect:" + urlWithMsg(url, msg);
     }
 
+    public static String redirectWithMsg(String url, RsData rsData) {
+        return "redirect:" + urlWithMsg(url, rsData);
+    }
+
     private static String urlWithMsg(String url, String msg) {
         return Ut.url.modifyQueryParam(url, "msg", msgWithTtl(msg));
+    }
+
+    public static String urlWithMsg(String url, RsData rsData) {
+        if (rsData.isFail()) {
+            return urlWithErrorMsg(url, rsData.getMsg());
+        }
+
+        return urlWithMsg(url, rsData.getMsg());
+    }
+
+    public static String urlWithErrorMsg(String url, String errorMsg) {
+        return Ut.url.modifyQueryParam(url, "errorMsg", msgWithTtl(errorMsg));
     }
 
     private static String msgWithTtl(String msg) {

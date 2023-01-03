@@ -98,12 +98,32 @@ public class MemberController {
 
     // 자기 페이지
     @PreAuthorize("isAuthenticated()")
-    @GetMapping
+    @GetMapping("/profile")
     public String showProfile(Model model) {
 
         long actorRestCash = memberService.getRestCash(rq.getMember());
         model.addAttribute("actorRestCash", actorRestCash);
 
         return "member/profile";
+    }
+
+    // 비밀번호 수정
+    @PreAuthorize("isAuthenticated()")
+    @GetMapping("/modifyPassword")
+    public String showModifyPassword(){
+        return "member/modifyPassword";
+    }
+
+    @PreAuthorize("isAuthenticated()")
+    @PostMapping("/modifyPassword")
+    public String modifyPassword(String oldPassword, String newPassword) {
+        Member member = rq.getMember();
+        RsData rsData = memberService.modifyPassword(member, newPassword, oldPassword);
+
+        if (rsData.isFail()) {
+            return rq.historyBack(rsData.getMsg());
+        }
+
+        return Rq.redirectWithMsg("/", rsData);
     }
 }

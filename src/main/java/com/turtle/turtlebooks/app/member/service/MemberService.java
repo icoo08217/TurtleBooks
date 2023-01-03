@@ -76,4 +76,16 @@ public class MemberService {
     public long getRestCash(Member member) {
         return memberRepository.findById(member.getId()).get().getRestCash();
     }
+
+    public RsData modifyPassword(Member member, String password, String oldPassword) {
+        Optional<Member> opMember = memberRepository.findById(member.getId());
+
+        if (passwordEncoder.matches(oldPassword, opMember.get().getPassword()) == false) {
+            return RsData.of("F-1" , "기존 비밀번호가 일치하지 않습니다.");
+        }
+
+        opMember.get().setPassword(passwordEncoder.encode(password));
+
+        return RsData.of("S-1", "비밀번호가 변경되었습니다.");
+    }
 }
