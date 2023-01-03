@@ -87,7 +87,7 @@ public class MemberController {
             return rq.historyBack("일치하는 회원이 존재하지 않습니다.");
         }
 
-        RsData sendTempLoginPwToEmailResultData = memberService.sendTempLoginPwToEmailResultData(member);
+        RsData sendTempLoginPwToEmailResultData = memberService.sendTempPasswordToEmail(member);
 
         if (sendTempLoginPwToEmailResultData.isFail()) {
             return rq.historyBack(sendTempLoginPwToEmailResultData);
@@ -126,4 +126,23 @@ public class MemberController {
 
         return Rq.redirectWithMsg("/", rsData);
     }
+
+    @PreAuthorize("isAnonymous()")
+    @GetMapping("/beAuthor")
+    public String showBeAuthor() {
+        return "member/beAuthor";
+    }
+
+    public String beAuthor(String nickname) {
+        Member member = rq.getMember();
+
+        RsData rsData = memberService.beAuthor(member , nickname);
+
+        if (rsData.isFail()) {
+            return Rq.redirectWithMsg("/member/beAuthor", rsData);
+        }
+
+        return Rq.redirectWithMsg("/", rsData);
+    }
+
 }
