@@ -2,6 +2,7 @@ package com.turtle.turtlebooks.app.member.service;
 
 import com.turtle.turtlebooks.app.AppConfig;
 import com.turtle.turtlebooks.app.base.dto.RsData;
+import com.turtle.turtlebooks.app.email.service.EmailService;
 import com.turtle.turtlebooks.app.member.entity.Member;
 import com.turtle.turtlebooks.app.member.exception.AlreadyJoinException;
 import com.turtle.turtlebooks.app.member.repository.MemberRepository;
@@ -26,6 +27,7 @@ public class MemberService {
 
     private final MemberRepository memberRepository;
     private final PasswordEncoder passwordEncoder;
+    private final EmailService emailService;
 
     @Transactional
     public Member join(String username, String password, String email, String nickname) {
