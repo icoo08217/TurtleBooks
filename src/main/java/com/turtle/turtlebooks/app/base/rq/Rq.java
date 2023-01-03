@@ -1,6 +1,8 @@
 package com.turtle.turtlebooks.app.base.rq;
 
+import com.turtle.turtlebooks.app.base.dto.RsData;
 import com.turtle.turtlebooks.app.member.entity.Member;
+import com.turtle.turtlebooks.util.Ut;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -8,6 +10,7 @@ import org.springframework.web.context.annotation.RequestScope;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Date;
 
 @Component
 @Slf4j
@@ -28,6 +31,18 @@ public class Rq {
         this.member = member;
     }
 
+    public static String redirectWithMsg(String url, String msg) {
+        return "redirect:" + urlWithMsg(url, msg);
+    }
+
+    private static String urlWithMsg(String url, String msg) {
+        return Ut.url.modifyQueryParam(url, "msg", msgWithTtl(msg));
+    }
+
+    private static String msgWithTtl(String msg) {
+        return Ut.url.encode(msg) + ";ttl=" + new Date().getTime();
+    }
+
     public boolean isLogined() {
         return isLogout() == false;
     }
@@ -41,5 +56,15 @@ public class Rq {
             return 0;
         }
         return getMember().getId();
+    }
+
+    public String historyBack(String msg) {
+        req.setAttribute("alertMsg", msg);
+
+        return "common/js";
+    }
+
+    public String historyBack(RsData rsData) {
+        return historyBack(rsData.getMsg());
     }
 }
