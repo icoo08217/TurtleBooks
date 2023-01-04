@@ -2,6 +2,7 @@ package com.turtle.turtlebooks.app.base.rq;
 
 import com.turtle.turtlebooks.app.base.dto.RsData;
 import com.turtle.turtlebooks.app.member.entity.Member;
+import com.turtle.turtlebooks.app.security.dto.MemberContext;
 import com.turtle.turtlebooks.util.Ut;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
@@ -20,6 +21,7 @@ public class Rq {
     private final HttpServletRequest req;
     private final HttpServletResponse resp;
 //    private final MemberContext memberContext;
+
     @Getter
     private final Member member;
 

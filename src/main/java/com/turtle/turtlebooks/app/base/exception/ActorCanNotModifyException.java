@@ -1,0 +1,4 @@
+package com.turtle.turtlebooks.app.base.exception;
+
+public class ActorCanNotModifyException extends RuntimeException{
+}
