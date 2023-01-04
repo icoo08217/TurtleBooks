@@ -4,6 +4,7 @@ import com.turtle.turtlebooks.app.AppConfig;
 import com.turtle.turtlebooks.app.base.dto.RsData;
 import com.turtle.turtlebooks.app.email.entity.SendEmailLog;
 import com.turtle.turtlebooks.app.email.repository.EmailLogRepository;
+import com.turtle.turtlebooks.app.emailSender.service.EmailSenderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.mail.MailException;
 import org.springframework.stereotype.Service;

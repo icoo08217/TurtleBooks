@@ -1,4 +1,4 @@
-package com.turtle.turtlebooks.app.postHashTag.entity;
+package com.turtle.turtlebooks.app.postTag.entity;
 
 import com.turtle.turtlebooks.app.base.entity.BaseEntity;
 import com.turtle.turtlebooks.app.member.entity.Member;
@@ -11,7 +11,7 @@ import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class PostHashTag extends BaseEntity {
+public class PostTag extends BaseEntity {
 
     @ManyToOne
     @OnDelete(action = OnDeleteAction.CASCADE)

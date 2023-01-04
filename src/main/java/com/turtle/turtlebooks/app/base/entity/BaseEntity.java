@@ -8,6 +8,8 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 @Getter
 @MappedSuperclass
@@ -27,6 +29,10 @@ public class BaseEntity {
 
     @LastModifiedDate
     private LocalDateTime updateDate;
+
+    @Transient
+    @Builder.Default
+    private Map<String, Object> extra = new LinkedHashMap<>();
 
     public BaseEntity(long id) {
         this.id = id;
