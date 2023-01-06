@@ -54,7 +54,7 @@ public class Post extends BaseEntity {
         }
 
         return postTags.stream()
-                .map(postTag -> "#" + postTag.getPostKeyword().getContent)
+                .map(postTag -> "#" + postTag.getPostKeyword().getContent())
                 .sorted()
                 .collect(Collectors.joining(" "));
     }
