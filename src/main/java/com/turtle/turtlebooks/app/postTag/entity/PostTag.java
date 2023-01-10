@@ -3,7 +3,7 @@ package com.turtle.turtlebooks.app.postTag.entity;
 import com.turtle.turtlebooks.app.base.entity.BaseEntity;
 import com.turtle.turtlebooks.app.member.entity.Member;
 import com.turtle.turtlebooks.app.post.entity.Post;
-import com.turtle.turtlebooks.app.postKeyWord.entity.PostKeyWord;
+import com.turtle.turtlebooks.app.postkeyword.entity.PostKeyword;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 import org.hibernate.annotations.OnDelete;
@@ -32,5 +32,5 @@ public class PostTag extends BaseEntity {
 
     @ManyToOne
     @ToString.Exclude
-    private PostKeyWord postKeyword;
+    private PostKeyword postKeyword;
 }

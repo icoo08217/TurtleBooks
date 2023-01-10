@@ -7,6 +7,7 @@ import com.turtle.turtlebooks.app.member.entity.Member;
 import com.turtle.turtlebooks.app.post.dto.PostForm;
 import com.turtle.turtlebooks.app.post.entity.Post;
 import com.turtle.turtlebooks.app.post.service.PostService;
+import com.turtle.turtlebooks.app.postTag.entity.PostTag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -105,7 +106,7 @@ public class PostController {
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/tag/{tagContent}")
     public String tagList(Model model, @PathVariable String tagContent) {
-        List<Post> postTags = postService.getPostTags(rq.getMember(), tagContent);
+        List<PostTag> postTags = postService.getPostTags(rq.getMember(), tagContent);
 
         model.addAttribute("postTags", postTags);
 
