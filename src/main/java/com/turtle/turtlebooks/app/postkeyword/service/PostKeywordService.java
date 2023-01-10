@@ -5,6 +5,7 @@ import com.turtle.turtlebooks.app.postkeyword.repository.PostKeywordRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -30,4 +31,15 @@ public class PostKeywordService {
     }
 
 
+    public List<PostKeyword> findByMemberId(long authorId) {
+        return postKeywordRepository.getQslAllByAuthorId(authorId);
+    }
+
+    public Optional<PostKeyword> findById(Long id) {
+        return postKeywordRepository.findById(id);
+    }
+
+    public PostKeyword findByContentOrSave(String content) {
+        return save(content);
+    }
 }
