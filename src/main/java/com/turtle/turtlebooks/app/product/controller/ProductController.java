@@ -2,6 +2,7 @@ package com.turtle.turtlebooks.app.product.controller;
 
 import com.turtle.turtlebooks.app.base.rq.Rq;
 import com.turtle.turtlebooks.app.member.entity.Member;
+import com.turtle.turtlebooks.app.post.entity.Post;
 import com.turtle.turtlebooks.app.postkeyword.entity.PostKeyword;
 import com.turtle.turtlebooks.app.postkeyword.service.PostKeywordService;
 import com.turtle.turtlebooks.app.product.dto.ProductForm;
@@ -12,6 +13,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -43,5 +45,15 @@ public class ProductController {
         return "redirect:/product/" + product.getId();
     }
 
+    @GetMapping("/{id}")
+    public String showDetail(@PathVariable Long id , Model model) {
+        Product product = productService.findForPrintById(id , rq.getMember()).get();
+        List<Post> posts = productService.findPostsByProduct(product);
+
+        model.addAttribute("product", product);
+        model.addAttribute("posts", posts);
+
+        return "product/detail";
+    }
 
 }
