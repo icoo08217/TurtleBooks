@@ -107,7 +107,7 @@ public class ProductService {
         });
     }
 
-    private Optional<Product> findById(Long id) {
+    public Optional<Product> findById(Long id) {
         return productRepository.findById(id);
     }
 
@@ -131,5 +131,23 @@ public class ProductService {
 
     private List<Product> findAllByOrderByIdDesc() {
         return productRepository.findAllByOrderByIdDesc();
+    }
+
+    public boolean actorCanModify(Member member, Product product) {
+        if (member == null) return false;
+
+        return member.getId() == product.getAuthor().getId();
+    }
+
+    public void modify(Product product, String subject, int price, String productTagContents) {
+        product.setSubject(subject);
+        product.setPrice(price);
+
+        applyProductTags(product, productTagContents);
+    }
+
+    @Transactional
+    public void applyProductTags(Product product, String productTagContents) {
+        productTagService.applyProductTags(product , productTagContents)
     }
 }

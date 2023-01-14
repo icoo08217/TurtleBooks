@@ -1,11 +1,13 @@
 package com.turtle.turtlebooks.app.product.controller;
 
+import com.turtle.turtlebooks.app.base.exception.ActorCanNotModifyException;
 import com.turtle.turtlebooks.app.base.rq.Rq;
 import com.turtle.turtlebooks.app.member.entity.Member;
 import com.turtle.turtlebooks.app.post.entity.Post;
 import com.turtle.turtlebooks.app.postkeyword.entity.PostKeyword;
 import com.turtle.turtlebooks.app.postkeyword.service.PostKeywordService;
 import com.turtle.turtlebooks.app.product.dto.ProductForm;
+import com.turtle.turtlebooks.app.product.dto.ProductModifyForm;
 import com.turtle.turtlebooks.app.product.entity.Product;
 import com.turtle.turtlebooks.app.product.service.ProductService;
 import lombok.RequiredArgsConstructor;
@@ -65,5 +67,32 @@ public class ProductController {
         return "product/list";
     }
 
+    @PreAuthorize("isAuthenticated()")
+    @GetMapping("/{id}/modify")
+    public String showModify(@PathVariable Long id , Model model){
+        Product product = productService.findForPrintById(id, rq.getMember()).get();
+
+        // 현재 회원이 상품을 수정할 수 있는 사람인지 확인
+        if (productService.actorCanModify(rq.getMember() , product) == false){
+            throw new ActorCanNotModifyException();
+        }
+        model.addAttribute("product", product);
+
+        return "product/modify";
+    }
+
+    @PreAuthorize("isAuthenticated()")
+    @PostMapping("/{id}/modify")
+    public String modify(@Valid ProductModifyForm productForm, @PathVariable Long id) {
+        Product product = productService.findById(id).get();
+        Member member = rq.getMember();
+
+        if (productService.actorCanModify(rq.getMember() , product) == false){
+            throw new ActorCanNotModifyException();
+        }
+
+        productService.modify(product, productForm.getSubject(), productForm.getPrice(), productForm.getProductTagContents());
+        return Rq.redirectWithMsg("/product/" + product.getId(), "%d 번 도서 상품이 수정 완료되었습니다.".formatted(product.getId()));
+    }
 
 }
