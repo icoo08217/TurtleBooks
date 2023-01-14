@@ -46,8 +46,8 @@ public class ProductController {
     }
 
     @GetMapping("/{id}")
-    public String showDetail(@PathVariable Long id , Model model) {
-        Product product = productService.findForPrintById(id , rq.getMember()).get();
+    public String showDetail(@PathVariable Long id, Model model) {
+        Product product = productService.findForPrintById(id, rq.getMember()).get();
         List<Post> posts = productService.findPostsByProduct(product);
 
         model.addAttribute("product", product);
@@ -55,5 +55,15 @@ public class ProductController {
 
         return "product/detail";
     }
+
+    @GetMapping("list")
+    public String showList(Model model) {
+        List<Product> products = productService.findAllForPrintByOrderByIdDesc(rq.getMember());
+
+        model.addAttribute("products", products);
+
+        return "product/list";
+    }
+
 
 }

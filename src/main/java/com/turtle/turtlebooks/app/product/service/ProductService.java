@@ -120,4 +120,16 @@ public class ProductService {
                 .map(PostTag::getPost)
                 .collect(Collectors.toList());
     }
+
+    public List<Product> findAllForPrintByOrderByIdDesc(Member actor) {
+        List<Product> products = findAllByOrderByIdDesc();
+
+        loadForPrintData(products , actor);
+
+        return products;
+    }
+
+    private List<Product> findAllByOrderByIdDesc() {
+        return productRepository.findAllByOrderByIdDesc();
+    }
 }
