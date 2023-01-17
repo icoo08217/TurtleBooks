@@ -150,4 +150,12 @@ public class ProductService {
     public void applyProductTags(Product product, String productTagContents) {
         productTagService.applyProductTags(product , productTagContents)
     }
+
+    public boolean actorCanRemove(Member member, Product product) {
+        return actorCanModify(member, product);
+    }
+
+    public void remove(Product product) {
+        productRepository.delete(product);
+    }
 }

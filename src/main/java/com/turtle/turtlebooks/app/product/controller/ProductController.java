@@ -1,6 +1,7 @@
 package com.turtle.turtlebooks.app.product.controller;
 
 import com.turtle.turtlebooks.app.base.exception.ActorCanNotModifyException;
+import com.turtle.turtlebooks.app.base.exception.ActorCanNotRemoveException;
 import com.turtle.turtlebooks.app.base.rq.Rq;
 import com.turtle.turtlebooks.app.member.entity.Member;
 import com.turtle.turtlebooks.app.post.entity.Post;
@@ -93,6 +94,21 @@ public class ProductController {
 
         productService.modify(product, productForm.getSubject(), productForm.getPrice(), productForm.getProductTagContents());
         return Rq.redirectWithMsg("/product/" + product.getId(), "%d 번 도서 상품이 수정 완료되었습니다.".formatted(product.getId()));
+    }
+
+    @PreAuthorize("isAuthenticated()")
+    @GetMapping("/{id}/remove")
+    public String remove(@PathVariable Long id) {
+        Product product = productService.findById(id).get();
+        Member member = rq.getMember();
+
+        if(productService.actorCanRemove(member , product) == false) {
+            throw new ActorCanNotRemoveException();
+        }
+
+        productService.remove(product);
+
+        return Rq.redirectWithMsg("/post/list", "%번 글이 삭제되었습니다.".formatted(product.getId()));
     }
 
 }
