@@ -158,4 +158,8 @@ public class ProductService {
     public void remove(Product product) {
         productRepository.delete(product);
     }
+
+    public List<ProductTag> getProductTags(String tagContent, Member member) {
+
+    }
 }

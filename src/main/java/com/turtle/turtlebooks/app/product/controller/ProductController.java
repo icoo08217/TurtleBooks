@@ -111,4 +111,12 @@ public class ProductController {
         return Rq.redirectWithMsg("/post/list", "%번 글이 삭제되었습니다.".formatted(product.getId()));
     }
 
+    @GetMapping("/tag/{tagContent}")
+    public String tagList(Model model, @PathVariable String tagContent) {
+        List<ProductTag> productTags = productService.getProductTags(tagContent, rq.getMember());
+
+        model.addAttribute("productTags", productTags);
+        return "product/tagList";
+    }
+
 }
